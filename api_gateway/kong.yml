@@ -8,8 +8,6 @@ services:
       - name: rust-server-route
         paths:
           - /echo
-          - /echo/
-          - /echo/.*
         methods:
           - POST
         strip_path: false 
