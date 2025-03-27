@@ -1,0 +1,15 @@
+_format_version: "2.1"
+_transform: true
+
+services:
+  - name: rust-server
+    url: http://rust_server:3000
+    routes:
+      - name: rust-server-route
+        paths:
+          - /echo
+          - /echo/
+          - /echo/.*
+        methods:
+          - POST
+        strip_path: false 
