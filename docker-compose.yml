@@ -1,0 +1,7 @@
+services:
+  rust_server:
+    build:
+      context: ./rust_server
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"

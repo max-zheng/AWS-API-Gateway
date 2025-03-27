@@ -5,7 +5,7 @@ use axum::{
 };
 use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Debug)]
 struct EchoRequest {
     message: String,
 }
@@ -21,5 +21,6 @@ async fn main() {
 }
 
 async fn echo(Json(payload): Json<EchoRequest>) -> Json<EchoRequest> {
+    println!("Received payload: {:?}", payload);
     Json(payload)
 }
