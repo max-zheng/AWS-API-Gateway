@@ -1,11 +1,15 @@
-FROM kong:3.6
+FROM gcr.io/apigee-release/hybrid/apigee-emulator:1.6.1
 
-COPY kong.yml /usr/local/kong/declarative/kong.yml
+# Copy the OpenAPI specification
+COPY apigee.yaml /opt/apigee/conf/
 
-ENV KONG_DATABASE=off
-ENV KONG_DECLARATIVE_CONFIG=/usr/local/kong/declarative/kong.yml
-ENV KONG_PROXY_ACCESS_LOG=/dev/stdout
-ENV KONG_ADMIN_ACCESS_LOG=/dev/stdout
-ENV KONG_PROXY_ERROR_LOG=/dev/stderr
-ENV KONG_ADMIN_ERROR_LOG=/dev/stderr
-ENV KONG_ADMIN_LISTEN=0.0.0.0:8001 
+# Expose the emulator ports
+EXPOSE 8080 8081
+
+# Set environment variables
+ENV APIGEE_EMULATOR_PORT=8080
+ENV APIGEE_EMULATOR_ADMIN_PORT=8081
+ENV APIGEE_EMULATOR_CONFIG=/opt/apigee/conf/apigee.yaml
+
+# Start the emulator
+CMD ["/opt/apigee/emulator/start.sh"]

@@ -5,12 +5,17 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-  kong:
+
+  apigee_emulator:
     build:
       context: ./api_gateway
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
-      - "8001:8001"
+      - "8080:8080"
+      - "8081:8081"
     depends_on:
       - rust_server
+    environment:
+      - APIGEE_EMULATOR_PORT=8080
+      - APIGEE_EMULATOR_ADMIN_PORT=8081
+      - APIGEE_EMULATOR_CONFIG=/opt/apigee/conf/apigee.yaml

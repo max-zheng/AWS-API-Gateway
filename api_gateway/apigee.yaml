@@ -1,0 +1,45 @@
+openapi: 3.0.0
+info:
+  title: Rust Server API
+  version: 1.0.0
+  description: API Gateway for Rust Server
+
+servers:
+  - url: http://rust_server:3000
+    description: Rust Server
+
+paths:
+  /echo:
+    post:
+      summary: Echo endpoint
+      description: Echoes back the message sent in the request body
+      operationId: echo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  description: Message to echo back
+              required:
+                - message
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Echoed message
+                required:
+                  - message
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
